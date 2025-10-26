@@ -3,47 +3,53 @@
 import React from "react";
 import Image from "next/image";
 import {
-  Phone, MapPin, Clock, Wrench, Instagram, Facebook, MessageCircle,
-  Star, CheckCircle2, Shield, Car, Gauge
+  Phone,
+  MapPin,
+  Clock,
+  Wrench,
+  Instagram,
+  Facebook,
+  MessageCircle,
+  Star,
+  CheckCircle2,
+  Shield,
+  Car,
+  Gauge,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
+/* ==========================================================
+   SOS PNEUS 74 – Thème PREMIUM (boutons noirs)
+   - Hero fullscreen sombre + typographie forte
+   - Sections éditoriales full-bleed
+   - Cartes blanches premium (lisibilité)
+   - Galerie horizontale avec scroll-snap
+   - AGENCE UNIQUE : Annemasse (74)
+   ========================================================== */
+
 // ---------- Helpers
 const Section = ({ id, className = "", children }: any) => (
-  <section id={id} className={className}>{children}</section>
+  <section id={id} className={className}>
+    {children}
+  </section>
 );
 
-// ---------- Données agences
-const BRANCHES = {
-  "74": {
-    label: "74",
-    city: "Annemasse",
-    phone: "+33768933342",
-    phoneDisplay: "07 68 93 33 42",
-    whatsapp: "https://wa.me/33768933342?text=Bonjour%20SOS%20PNEUS%2074",
-    address: "8 Imp. du Col de la Faucille, 74100 Vétraz-Monthoux",
-    gmaps:
-      "https://maps.google.com/?q=SOS%20PNEUS%2074%208%20Imp.%20du%20Col%20de%20la%20Faucille%2C%2074100%20V%C3%A9traz-Monthoux",
-    facebook: "https://www.facebook.com/p/Sos-Pneus-74-61556794664170/",
-    instagram: "https://www.instagram.com/sos_pneus_74/",
-  },
-  "01": {
-    label: "01",
-    city: "Cessy",
-    phone: "+33608379577",
-    phoneDisplay: "06 08 37 95 77",
-    whatsapp: "https://wa.me/33608379577?text=Bonjour%20SOS%20PNEUS%2001",
-    address: "204 Rue de la Bergerie, 01170 Cessy",
-    gmaps: "https://maps.google.com/?q=204%20Rue%20de%20la%20Bergerie%2C%2001170%20Cessy",
-    facebook: "https://www.facebook.com/p/SOS-PNEUS-01-100087050826421/",
-    instagram: null,
-  },
+// ---------- Données agence unique (74)
+const AGENCY = {
+  city: "Annemasse",
+  phone: "+33768933342",
+  phoneDisplay: "07 68 93 33 42",
+  whatsapp: "https://wa.me/33768933342?text=Bonjour%20SOS%20PNEUS",
+  address: "8 Imp. du Col de la Faucille, 74100 Vétraz-Monthoux",
+  gmaps:
+    "https://maps.google.com/?q=SOS%20PNEUS%2074%208%20Imp.%20du%20Col%20de%20la%20Faucille%2C%2074100%20V%C3%A9traz-Monthoux",
+  facebook: "https://www.facebook.com/p/Sos-Pneus-74-61556794664170/",
+  instagram: "https://www.instagram.com/sos_pneus_74/",
 } as const;
 
 export default function Website() {
-  const [branch, setBranch] = React.useState<keyof typeof BRANCHES>("74");
-  const b = BRANCHES[branch];
+  const b = AGENCY;
 
   const services = [
     { icon: <Wrench className="w-6 h-6" />, title: "Dépannage crevaison", desc: "Réparation mèche/champignon, roue de secours, assistance express." },
@@ -59,11 +65,11 @@ export default function Website() {
   ];
 
   return (
-    <div className="min-h-screen bg-black text-white">
-      {/* ---------- Header (transparent, sticky) */}
-      <header className="fixed top-0 inset-x-0 z-50 bg-black/60 backdrop-blur border-b border-white/10">
+    <div className="min-h-screen bg-black text-white font-sans">
+      {/* ---------- Header */}
+      <header className="fixed top-0 inset-x-0 z-50 bg-black/70 backdrop-blur supports-[backdrop-filter]:bg-black/60 border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-          <a href="#" className="flex items-center gap-3">
+          <a href="#" className="flex items-center gap-3 select-none">
             <Image src="/logo_sos_pneus.jpg" alt="SOS PNEUS" width={120} height={40} className="h-8 w-auto" />
             <span className="sr-only">SOS PNEUS</span>
           </a>
@@ -73,30 +79,19 @@ export default function Website() {
             <a href="#services" className="hover:text-yellow-300">Services</a>
             <a href="#tarifs" className="hover:text-yellow-300">Tarifs</a>
             <a href="#galerie" className="hover:text-yellow-300">Galerie</a>
-            <a href="#agences" className="hover:text-yellow-300">Agences</a>
+            <a href="#agence" className="hover:text-yellow-300">Agence</a>
             <a href="#contact" className="hover:text-yellow-300">Contact</a>
           </nav>
 
           <div className="flex items-center gap-2">
-            <div className="hidden sm:flex rounded-xl overflow-hidden border border-white/20">
-              {(["74","01"] as const).map(k => (
-                <button
-                  key={k}
-                  onClick={() => setBranch(k)}
-                  className={`px-3 py-1 text-sm font-semibold ${branch===k ? "bg-yellow-300 text-black" : "text-white hover:bg-white/10"}`}
-                >
-                  SOS {k}
-                </button>
-              ))}
-            </div>
-            <Button asChild className="bg-yellow-300 text-black rounded-2xl">
-              <a href={`tel:${b.phone}`}><Phone className="w-4 h-4 mr-2" /> {b.phoneDisplay}</a>
+            <Button asChild className="rounded-2xl bg-black text-white border border-white hover:bg-neutral-900">
+              <a href={`tel:${b.phone}`}><Phone className="mr-2 h-4 w-4" /> {b.phoneDisplay}</a>
             </Button>
           </div>
         </div>
       </header>
 
-      {/* ---------- HERO plein écran */}
+      {/* ---------- HERO fullscreen */}
       <Section id="univers" className="relative h-[100svh]">
         <Image src="/images/hero-1.jpg" alt="SOS PNEUS – Atelier mobile" fill priority className="object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
@@ -107,10 +102,10 @@ export default function Website() {
             </h1>
             <p className="mt-4 max-w-xl text-neutral-200">Crevaison, montage, équilibrage, diagnostics. Intervention rapide et soignée, sur place.</p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <Button asChild size="lg" className="bg-yellow-300 text-black rounded-2xl">
+              <Button asChild size="lg" className="rounded-2xl bg-black text-white border border-white hover:bg-neutral-900">
                 <a href={`tel:${b.phone}`}><Phone className="w-4 h-4 mr-2" /> Appeler</a>
               </Button>
-              <Button asChild variant="outline" size="lg" className="border-yellow-300 text-yellow-300 rounded-2xl">
+              <Button asChild size="lg" className="rounded-2xl border border-white text-white hover:bg-white/10">
                 <a href={b.whatsapp} target="_blank" rel="noreferrer"><MessageCircle className="w-4 h-4 mr-2" /> WhatsApp</a>
               </Button>
             </div>
@@ -118,22 +113,22 @@ export default function Website() {
         </div>
       </Section>
 
-      {/* ---------- Bandeau stats (style “marquee”) */}
+      {/* ---------- Bandeau chiffres */}
       <div className="border-y border-white/10 bg-neutral-900/50">
         <div className="max-w-7xl mx-auto px-4 py-4 grid grid-cols-2 md:grid-cols-4 gap-4 text-center text-sm">
           <div><div className="text-yellow-300 font-extrabold text-xl">30 min</div><div className="text-neutral-300">Délai moyen</div></div>
           <div><div className="text-yellow-300 font-extrabold text-xl">24/7</div><div className="text-neutral-300">Disponibilité</div></div>
-          <div><div className="text-yellow-300 font-extrabold text-xl">2 agences</div><div className="text-neutral-300">74 & 01</div></div>
+          <div><div className="text-yellow-300 font-extrabold text-xl">1 agence</div><div className="text-neutral-300">Annemasse</div></div>
           <div><div className="text-yellow-300 font-extrabold text-xl">5★</div><div className="text-neutral-300">Avis clients</div></div>
         </div>
       </div>
 
-      {/* ---------- Section éditoriale “Atelier mobile” (split full-bleed) */}
+      {/* ---------- Editorial split */}
       <Section className="relative py-20">
         <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-10 items-center">
           <div>
             <h2 className="text-3xl md:text-4xl font-bold">SOS PNEUS, l’atelier qui vient à vous</h2>
-            <p className="mt-4 text-neutral-300">Nous réalisons sur place réparation de crevaison, montage/équilibrage, contrôle pression et diagnostics. Intervention sur le bassin annemassien et Pays de Gex.</p>
+            <p className="mt-4 text-neutral-300">Nous réalisons sur place réparation de crevaison, montage/équilibrage, contrôle pression et diagnostics. Intervention sur le bassin annemassien et frontière.</p>
             <div className="mt-6 flex gap-4">
               <div className="flex items-center gap-2 text-sm"><CheckCircle2 className="text-yellow-300" /> Intervention rapide</div>
               <div className="flex items-center gap-2 text-sm"><CheckCircle2 className="text-yellow-300" /> Devis immédiat</div>
@@ -145,7 +140,7 @@ export default function Website() {
         </div>
       </Section>
 
-      {/* ---------- Services (sur fond noir, cartes Ferrari-like) */}
+      {/* ---------- Services */}
       <Section id="services" className="py-20 bg-neutral-950">
         <div className="max-w-7xl mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold">Services</h2>
@@ -154,7 +149,7 @@ export default function Website() {
             {services.map((s, i) => (
               <Card key={i} className="bg-white text-black rounded-2xl border-white/10">
                 <CardHeader className="space-y-2">
-                  <div className="w-12 h-12 rounded-xl bg-yellow-300/20 flex items-center justify-center text-black">{s.icon}</div>
+                  <div className="w-12 h-12 rounded-xl bg-black text-white border border-black/10 flex items-center justify-center">{s.icon}</div>
                   <CardTitle className="text-xl">{s.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -166,7 +161,7 @@ export default function Website() {
         </div>
       </Section>
 
-      {/* ---------- Tarifs (cartes blanches lisibles) */}
+      {/* ---------- Tarifs */}
       <Section id="tarifs" className="py-20 bg-gradient-to-b from-black to-neutral-900">
         <div className="max-w-7xl mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold">Tarifs indicatifs</h2>
@@ -181,14 +176,14 @@ export default function Website() {
                 <CardHeader>
                   <CardTitle className="flex items-center justify-between">
                     <span>{p.name}</span>
-                    <span className="text-yellow-600 font-bold">{p.price}</span>
+                    <span className="text-black font-bold">{p.price}</span>
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-2 text-sm">
                     {p.items.map((it, j) => (
                       <li key={j} className="flex items-start gap-2">
-                        <CheckCircle2 className="w-4 h-4 mt-0.5 text-yellow-600" /> <span>{it}</span>
+                        <CheckCircle2 className="w-4 h-4 mt-0.5 text-black" /> <span>{it}</span>
                       </li>
                     ))}
                   </ul>
@@ -199,13 +194,13 @@ export default function Website() {
         </div>
       </Section>
 
-      {/* ---------- Galerie horizontale (look Ferrari “lifestyle”) */}
+      {/* ---------- Galerie horizontale */}
       <Section id="galerie" className="py-20 bg-black">
         <div className="max-w-7xl mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold">Galerie</h2>
         </div>
         <div className="mt-8 overflow-x-auto no-scrollbar">
-          <div className="flex gap-4 px-4 min-w-max">
+          <div className="flex gap-4 px-4 min-w-max snap-x snap-mandatory">
             {[
               "/images/hero-2.jpg",
               "/images/hero-3.jpg",
@@ -216,37 +211,26 @@ export default function Website() {
               "/images/editorial-6.jpg",
               "/images/editorial-7.jpg",
             ].map((src, i) => (
-              <div key={i} className="relative w-[78vw] md:w-[42vw] lg:w-[32vw] h-[52vw] md:h-[32vw] lg:h-[22vw] rounded-2xl overflow-hidden ring-1 ring-white/10">
-                <Image src={src} alt={`SOS PNEUS photo ${i+1}`} fill className="object-cover" />
+              <div key={i} className="relative w-[78vw] md:w-[42vw] lg:w-[32vw] h-[52vw] md:h-[32vw] lg:h-[22vw] rounded-2xl overflow-hidden ring-1 ring-white/10 snap-center">
+                <Image src={src} alt={`SOS PNEUS photo ${i + 1}`} fill className="object-cover" />
               </div>
             ))}
           </div>
         </div>
       </Section>
 
-      {/* ---------- Nos agences (onglets) */}
-      <Section id="agences" className="py-20 bg-neutral-950">
+      {/* ---------- Agence (unique) */}
+      <Section id="agence" className="py-20 bg-neutral-950">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="flex items-center justify-between gap-4 flex-wrap">
-            <h2 className="text-3xl md:text-4xl font-bold">Nos agences</h2>
-            <div className="rounded-xl overflow-hidden border border-white/20">
-              {(["74","01"] as const).map(k => (
-                <button key={k} onClick={() => setBranch(k)}
-                  className={`px-4 py-2 text-sm font-semibold ${branch===k ? "bg-yellow-300 text-black" : "text-white hover:bg-white/10"}`}>
-                  SOS {k}
-                </button>
-              ))}
-            </div>
-          </div>
-
+          <h2 className="text-3xl md:text-4xl font-bold">Notre agence – Annemasse</h2>
           <div className="mt-8 grid lg:grid-cols-3 gap-6">
             <Card className="bg-white text-black rounded-2xl">
               <CardHeader><CardTitle>Coordonnées</CardTitle></CardHeader>
               <CardContent className="space-y-3 text-sm">
-                <div className="flex items-center gap-2"><Phone className="w-4 h-4 text-yellow-600" /><a className="underline" href={`tel:${b.phone}`}>{b.phoneDisplay}</a></div>
-                <div className="flex items-start gap-2"><MapPin className="w-4 h-4 mt-0.5 text-yellow-600" /><a className="underline" href={b.gmaps} target="_blank" rel="noreferrer">{b.address}</a></div>
-                <div className="flex items-center gap-2"><Clock className="w-4 h-4 text-yellow-600" /> Ouvert 24h/24 – 7j/7</div>
-                <div className="flex items-center gap-2"><MessageCircle className="w-4 h-4 text-yellow-600" /><a className="underline" href={b.whatsapp} target="_blank" rel="noreferrer">WhatsApp</a></div>
+                <div className="flex items-center gap-2"><Phone className="w-4 h-4 text-black" /><a className="underline" href={`tel:${b.phone}`}>{b.phoneDisplay}</a></div>
+                <div className="flex items-start gap-2"><MapPin className="w-4 h-4 mt-0.5 text-black" /><a className="underline" href={b.gmaps} target="_blank" rel="noreferrer">{b.address}</a></div>
+                <div className="flex items-center gap-2"><Clock className="w-4 h-4 text-black" /> 24h/24 – 7j/7</div>
+                <div className="flex items-center gap-2"><MessageCircle className="w-4 h-4 text-black" /><a className="underline" href={b.whatsapp} target="_blank" rel="noreferrer">WhatsApp</a></div>
               </CardContent>
             </Card>
 
@@ -255,7 +239,7 @@ export default function Website() {
               <CardContent>
                 <div className="rounded-xl overflow-hidden border border-black/10">
                   <iframe
-                    title={`Facebook – SOS Pneus ${b.label}`}
+                    title={`Facebook – SOS Pneus 74`}
                     className="w-full h-[380px]"
                     style={{ border: 0, overflow: "hidden", background: "white" }}
                     scrolling="no"
@@ -270,50 +254,42 @@ export default function Website() {
             <Card className="bg-white text-black rounded-2xl lg:col-span-1">
               <CardHeader><CardTitle>Instagram</CardTitle></CardHeader>
               <CardContent className="space-y-4">
-                <p className="text-sm text-neutral-700">{b.instagram ? "@sos_pneus_74" : "Bientôt pour SOS 01"}</p>
-                {b.instagram && (
-                  <>
-                    <blockquote className="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/C5J7dmft-_0/?igsh=MWlvcmU0NHZrbmF2dQ==" data-instgrm-version="14" />
-                    <blockquote className="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/C5qL_i0I4ql/?img_index=1&igsh=c3FzZHMzbzV4d29u" data-instgrm-version="14" />
-                    <script async src="https://www.instagram.com/embed.js"></script>
-                    <Button asChild className="bg-yellow-300 text-black rounded-2xl"><a href={b.instagram} target="_blank" rel="noreferrer"><Instagram className="w-4 h-4 mr-2" />Ouvrir Instagram</a></Button>
-                  </>
-                )}
+                <p className="text-sm text-neutral-700">@sos_pneus_74</p>
+                <blockquote className="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/C5J7dmft-_0/?igsh=MWlvcmU0NHZrbmF2dQ==" data-instgrm-version="14" />
+                <blockquote className="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/C5qL_i0I4ql/?img_index=1&igsh=c3FzZHMzbzV4d29u" data-instgrm-version="14" />
+                <script async src="https://www.instagram.com/embed.js"></script>
+                <Button asChild className="rounded-2xl bg-black text-white border border-black hover:bg-neutral-900">
+                  <a href={b.instagram} target="_blank" rel="noreferrer"><Instagram className="w-4 h-4 mr-2" />Ouvrir Instagram</a>
+                </Button>
               </CardContent>
             </Card>
           </div>
         </div>
       </Section>
 
-      {/* ---------- Contact (map large + CTA) */}
+      {/* ---------- Contact */}
       <Section id="contact" className="py-20 bg-black">
         <div className="max-w-7xl mx-auto px-4 grid lg:grid-cols-3 gap-6">
           <Card className="bg-white text-black rounded-2xl">
             <CardHeader><CardTitle>Contact direct</CardTitle></CardHeader>
             <CardContent className="space-y-3 text-sm">
-              <div className="flex items-center gap-2"><Phone className="w-4 h-4 text-yellow-600" /><a className="underline" href={`tel:${b.phone}`}>{b.phoneDisplay}</a></div>
-              <div className="flex items-start gap-2"><MapPin className="w-4 h-4 mt-0.5 text-yellow-600" /><a className="underline" href={b.gmaps} target="_blank" rel="noreferrer">{b.address}</a></div>
-              <div className="flex items-center gap-2"><Clock className="w-4 h-4 text-yellow-600" /> 24h/24 – 7j/7</div>
-              <div className="flex items-center gap-2"><MessageCircle className="w-4 h-4 text-yellow-600" /><a className="underline" href={b.whatsapp} target="_blank" rel="noreferrer">WhatsApp</a></div>
-              <div className="flex items-center gap-2"><MessageCircle className="w-4 h-4 text-yellow-600" /><a className="underline" href={`mailto:contact@sospneus74.fr`}>contact@sospneus74.fr</a></div>
+              <div className="flex items-center gap-2"><Phone className="w-4 h-4 text-black" /><a className="underline" href={`tel:${b.phone}`}>{b.phoneDisplay}</a></div>
+              <div className="flex items-start gap-2"><MapPin className="w-4 h-4 mt-0.5 text-black" /><a className="underline" href={b.gmaps} target="_blank" rel="noreferrer">{b.address}</a></div>
+              <div className="flex items-center gap-2"><Clock className="w-4 h-4 text-black" /> 24h/24 – 7j/7</div>
+              <div className="flex items-center gap-2"><MessageCircle className="w-4 h-4 text-black" /><a className="underline" href={b.whatsapp} target="_blank" rel="noreferrer">WhatsApp</a></div>
+              <div className="flex items-center gap-2"><MessageCircle className="w-4 h-4 text-black" /><a className="underline" href={`mailto:contact@sospneus74.fr`}>contact@sospneus74.fr</a></div>
             </CardContent>
           </Card>
 
           <Card className="bg-white rounded-2xl lg:col-span-2">
             <CardContent className="p-0">
-              <iframe
-                title={`Localisation SOS PNEUS ${b.label}`}
-                className="w-full h-[360px] rounded-2xl"
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                src={`${b.gmaps}&output=embed`}
-              />
+              <iframe title={`Localisation SOS PNEUS 74`} className="w-full h-[360px] rounded-2xl" loading="lazy" referrerPolicy="no-referrer-when-downgrade" src={`${b.gmaps}&output=embed`} />
             </CardContent>
           </Card>
         </div>
 
         <div className="text-center mt-8">
-          <Button asChild size="lg" className="bg-yellow-300 text-black rounded-2xl">
+          <Button asChild size="lg" className="rounded-2xl bg-black text-white border border-white hover:bg-neutral-900">
             <a href={`tel:${b.phone}`}><Phone className="mr-2 h-4 w-4" /> Appeler maintenant</a>
           </Button>
         </div>
@@ -328,8 +304,12 @@ export default function Website() {
           </div>
           <div className="text-sm text-neutral-400">© {new Date().getFullYear()} — Tous droits réservés.</div>
           <div className="flex justify-start md:justify-end gap-3">
-            <Button asChild className="bg-yellow-300 text-black rounded-2xl"><a href={b.instagram ?? "https://www.instagram.com/sos_pneus_74/"} target="_blank"><Instagram className="w-4 h-4 mr-2" />Instagram</a></Button>
-            <Button asChild className="bg-yellow-300 text-black rounded-2xl"><a href={b.facebook} target="_blank"><Facebook className="w-4 h-4 mr-2" />Facebook</a></Button>
+            <Button asChild className="rounded-2xl bg-black text-white border border-white hover:bg-neutral-900">
+              <a href={b.instagram} target="_blank" rel="noreferrer"><Instagram className="w-4 h-4 mr-2" />Instagram</a>
+            </Button>
+            <Button asChild className="rounded-2xl bg-black text-white border border-white hover:bg-neutral-900">
+              <a href={b.facebook} target="_blank" rel="noreferrer"><Facebook className="w-4 h-4 mr-2" />Facebook</a>
+            </Button>
           </div>
         </div>
       </footer>
