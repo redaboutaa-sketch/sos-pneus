@@ -418,7 +418,7 @@ export default function Website() {
                   <div className="flex items-start gap-2"><MapPin className="w-4 h-4 mt-0.5 text-black" aria-hidden="true" /><a className="underline" href={b.gmaps} target="_blank" rel="noreferrer">{b.address}</a></div>
                   <div className="flex items-center gap-2"><Clock className="w-4 h-4 text-black" aria-hidden="true" /> 24h/24 – 7j/7</div>
                   <div className="flex items-center gap-2"><MessageCircle className="w-4 h-4 text-black" aria-hidden="true" /><a className="underline" href={b.whatsapp} target="_blank" rel="noreferrer">WhatsApp</a></div>
-                  <div className="flex items-center gap-2"><MessageCircle className="w-4 h-4 text-black" aria-hidden="true" /><a className="underline" href={`mailto:contact@sospneus74.fr`}>contact@sospneus74.fr</a></div>
+                  <div className="flex items-center gap-2"><MessageCircle className="w-4 h-4 text-black" aria-hidden="true" /><a className="underline" href={`mailto:contact@sospneus74.com`}>contact@sospneus74.com</a></div>
                 </CardContent>
               </Card>
 
