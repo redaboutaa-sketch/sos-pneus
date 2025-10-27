@@ -42,7 +42,7 @@ const AGENCY = {
   gmaps:
     "https://maps.google.com/?q=SOS%20PNEUS%2074%208%20Imp.%20du%20Col%20de%20la%20Faucille%2C%2074100%20V%C3%A9traz-Monthoux",
   facebook: "https://www.facebook.com/p/Sos-Pneus-74-61556794664170/",
-  instagram: "https://www.instagram.com/sos_pneus_74/",
+  instagram: "https://www.instagram.com/sos_pneus_74",
 } as const;
 
 export default function Website() {
