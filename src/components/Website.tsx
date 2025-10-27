@@ -206,8 +206,8 @@ export default function Website() {
               <div>
                 <h2 id="editorial-title" className="text-3xl md:text-4xl font-bold">SOS PNEUS, l’atelier qui vient à vous</h2>
                 <p className="mt-4 text-neutral-300">
-                  Réparation de crevaison, montage/équilibrage, contrôle pression et diagnostics. Permutation saisonnière, remplacement de pneus usés et fourniture de pneus adaptés à votre véhicule.
-                  Intervention soignée sur le bassin annemassien et la frontière.
+                  Réparation de crevaison, montage/équilibrage, contrôle pression et diagnostics. Permutation saisonnière (changement de pneus Eté / Hiver), remplacement de pneus usés et fourniture de pneus adaptés à votre véhicule.
+                  Intervention soignée sur le bassin de la Haute Savoie (Annemasse, Thonon, Annecy,..).
                 </p>
                 <div className="mt-6 flex gap-4">
                   <div className="flex items-center gap-2 text-sm"><CheckCircle2 className="text-yellow-300" /> Intervention rapide</div>
@@ -256,7 +256,7 @@ export default function Website() {
               <div className="mt-10 grid lg:grid-cols-3 gap-6">
                 {[
                   { name: "Réparation crevaison", price: "20€", items: ["Mèche ou champignon", "Contrôle pression", "Équilibrage (option)"] },
-                  { name: "Montage pneu (à l’unité)", price: "A partir de 20€", items: ["Montage/valve", "Équilibrage"] },
+                  { name: "Montage pneu (à l’unité)", price: "A partir de 15€", items: ["Montage/valve", "Équilibrage"] },
                   { name: "Dépannage 24/7", price: "sur devis", items: ["Déplacement sur zone", "Diagnostics & solutions", "Remorquage partenaire (si besoin)"] },
                 ].map((p, i) => (
                   <Card key={i} className="bg-white text-black rounded-2xl" itemScope itemType="https://schema.org/Offer">
