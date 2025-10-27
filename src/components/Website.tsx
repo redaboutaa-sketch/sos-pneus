@@ -396,8 +396,8 @@ export default function Website() {
                   <CardHeader><CardTitle>Instagram</CardTitle></CardHeader>
                   <CardContent className="space-y-4">
                     <p className="text-sm text-neutral-700">@sos_pneus_74</p>
-                    <blockquote className="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/C5J7dmft-_0/?igsh=MWlvcmU0NHZrbmF2dQ==" data-instgrm-version="14" />
-                    <blockquote className="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/C5qL_i0I4ql/?img_index=1&igsh=c3FzZHMzbzV4d29u" data-instgrm-version="14" />
+                    <blockquote className="instagram-media" data-instgrm-permalink="https://www.instagram.com/sos_pneus_74/" data-instgrm-version="14" />
+                    <blockquote className="instagram-media" data-instgrm-permalink="https://www.instagram.com/stories/highlights/18094781062622371/" data-instgrm-version="14" />
                     <script async src="https://www.instagram.com/embed.js"></script>
                     <Button asChild className="rounded-2xl bg-black text-white border border-black hover:bg-neutral-900" aria-label="Ouvrir Instagram SOS PNEUS 74">
                       <a href={b.instagram} target="_blank" rel="noreferrer"><Instagram className="w-4 h-4 mr-2" />Ouvrir Instagram</a>
